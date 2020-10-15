@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>Bootstrap - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body onload="getMissingLinks()">
+    <script>
+
+    window.addEventListener("scroll", function() {
+      var elementTarget = document.getElementById("about");
+      if (window.scrollY > (elementTarget.offsetTop + elementTarget.offsetHeight)) {
+        document.getElementById("top").style.top = "10px";
+      } else {
+        document.getElementById("top").style.top = "-50px";
+      }
+    });
+
+      function getMissingLink(e) {
+        e.src = "images/missing_" + Math.ceil(Math.random() * 4) + ".png";
+      }
+      function getMissingLinks() {
+        const elements = document.getElementsByClassName("missing");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].src = "images/missing_" + Math.ceil(Math.random() * 4) + ".png";
+        }
+      }
+    </script>
+    <header>
+     <nav>
+       <a href="#about">About Me</a>
+       <a href="#projects">Projects</a>
+       <a href="#contact">Contact</a>
+     </nav>
+     <div class="header-content">
+       <h1> Andrew's Page </h1>
+       <p> Welcome to my page. From here you'll be able to learn more about me and my studies. </p>
+     </div>
+   </header>
+   <a id="top" href="#"><i class="fa fa-arrow-circle-up"></i></a>
+      <!--<nav class="navbar navbar-expanded justify-content-center">
+        <ul class="nav nav-tab">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </nav>-->
+    </div>
+    <!--<nav class="navbar navbar-collapsed navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Home</a>
+          <a class="nav-item nav-link" href="#">Projects</a>
+          <a class="nav-item nav-link" href="#">Contact</a>
+        </div>
+      </div>
+    </nav>-->
+    <div class="container">
+
+      <div class="section-header" id="about">
+        <h1> About Me </h1>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10 col-md-6 col-lg-4 offset-md-0 offset-sm-1 offset-lg-1">
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;I am a student at the University of Massachusetts Lowell studying computer science. I enjoy both the front and back end aspects of web development and have taken up many personal projects building websites. In my free time, I enjoy playing videogames like RPGs and puzzle games, cooking, reading, model kit building, and hiking. I have a dog named Cody; he's a white-colored golden retriever.</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;My current classes this semester include GUI, Introduction to Computer Security, Database I, Software Engineering, and Mobile Robotics. I am currently set to graduate in spring semester of 2020. Projects I have done in my other classes can be found in the Projects tab.</p>
+        </div>
+        <div class="col-sm-10 col-md-6 col-lg-4 offset-md-0 offset-sm-1 offset-lg-2">
+          <div class="card">
+            <img class="card-img-top" src="images/dog.jpeg" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">This is my dog Cody.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-header" id="projects">
+        <h1> Projects </h1>
+      </div>
+
+      <div id="accordion"> <!--START: accordion-->
+        <!--GUI projects-->
+        <div class="card mt-4 mb-3">
+          <div class="card-header accordion-toggle" data-toggle="collapse" data-target="#gui">
+            <button class="btn btn-link theme-orange-text">
+              GUI
+            </button>
+          </div>
+
+          <div id="gui" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row justify-content-center mt-3">
+                <a class="col-lg-4 col-md-6 mb-3" target="_blank" rel="noopener noreferrer" href="https://google.com">
+                  <div class="card interactable">
+                    <img class="card-img-top" src="images/hw2-tn.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Homework 2</h5>
+                      <p class="card-text">A personal landing page using HTML and CSS. This site has been updated in Homework 4, but the old version is still accessable here.</p>
+                      <p class="card-text"><small class="text-muted">Completed in September</small></p>
+                    </div>
+                  </div>
+                </a>
+                <a class="col-lg-4 col-md-6 mb-3" target="_blank" rel="noopener noreferrer" href="https://google.com">
+                  <div class="card interactable">
+                    <img class="card-img-top" src="images/hw3-tn.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Homework 3</h5>
+                      <p class="card-text">Using only CSS and supplied HTML this page had to be made to look exactly like a supplied page</p>
+                      <p class="card-text"><small class="text-muted">Completed in October</small></p>
+                    </div>
+                  </div>
+                </a>
+                <a class="col-lg-4 col-md-6 mb-3" target="_blank" rel="noopener noreferrer" href="https://google.com">
+                  <div class="card interactable">
+                    <img class="card-img-top" src="images/image-not-found.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Homework 4</h5>
+                      <p class="card-text">The current site is made using HTML, CSS, and Bootstrap for a responsive design.</p>
+                      <p class="card-text"><small class="text-muted">Unfinished</small></p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Graphics projects-->
+        <div class="card mt-4 mb-3">
+          <div class="card-header accordion-toggle" data-toggle="collapse" data-target="#personal">
+            <button class="btn btn-link theme-orange-text">
+              Graphics 1
+            </button>
+          </div>
+          <div id="personal" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row justify-content-center mt-3">
+                <div class="col-lg-4 col-sm-6 col-8 mb-3 empty">
+                    <img onclick="getMissingLink(this)" class="missing" alt="Card image cap">
+                    <h3>Hmmmm... <br>Seems like nothing is here</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!--END: accordion-->
+
+      <div class="section-header" id="contact">
+        <h1> Contact </h1>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+          <form>
+            <h5 class="text-center"> You can reach out by filling out this form.</h5>
+            <div class="row">
+              <div class="col-dm-12 col-md">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-white">
+                        <i class="fa fa-user"></i>&nbsp
+                      </span>
+                    </div>
+                    <input name="name" type="name" placeholder="Name" class="form-control border-left-0" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-white">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                    <input name="email" type="email" placeholder="Email" class="form-control border-left-0" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea class="form-control" id="message" rows="4" placeholder="Message here..." required></textarea>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary theme-orange-button">
+                <i class="fa fa-paper-plane"></i>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 align-self-center" align="center">
+            <p> <!-- Code retrieved from jigsaw.w3.org/css-validator to show the CSS has passed -->
+              <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!">
+              </a>
+            </p>
+          </div>
+          <div class="col-sm-6 align-self-center" align="center">
+            <a href="https://www.linkedin.com/in/andrew-r-051472120/" target="_blank" rel="noopener noreferrer">
+              <img src="https://img.icons8.com/ios-glyphs/90/FFFFFF/linkedin.png" alt="LinkedIn">
+            </a>
+            <a href="https://github.com/andrivard4" target="_blank" rel="noopener noreferrer">
+              <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/github-2.png" alt="GitHub">
+            </a>
+            <a href="https://www.instagram.com/andrew__r123/" target="_blank" rel="noopener noreferrer">
+              <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/instagram-new.png" alt="Instagram">
+            </a>
+          </div>
+          <div class="col-sm-3 align-self-center" align="center">
+            <p class="cr">© 2020 Andrew Rivard</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
