@@ -120,6 +120,7 @@ function renderTable(data) {
 async function animate_line() {
   var index = 50, direction = false;
   var line = document.getElementById("line");
+  console.log("loaded");
   while(true) {
     var color = "linear-gradient(90deg, rgba(255,190,0,1) 0%, rgba(255,113,0,1) "+index+"%, rgba(255,190,0,1) 100%)"
     line.style.background = color;
