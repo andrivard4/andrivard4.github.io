@@ -8,9 +8,10 @@
     <title>Homework 5</title>
   </head>
   <body>
-    <div class="line"></div>
+    <div class="line" id="line" onload="animate()"></div>
+    <!-- This is the main form for the page -->
     <form id="input" onsubmit="getUserInput(event)">
-      <h1 class="name"> Multiplyer </h1>
+      <h1 class="name" id="name"> Multiplyer </h1>
       <p>Welcome to <span class="name">Multiplyer</span>! Enter a range of numbers, we'll think about it a bit, and give you a table.</p>
       Range 1: <input type="text" name="one" id="one" placeholder="#" required> -
       <input type="text error_message" name="two" id="two" placeholder="#" required></br>
@@ -22,11 +23,13 @@
       <p id="four_error" class="error_message hidden"></p></br>
       <input type="submit">
     </form>
+    <!-- Message when no table is rendered -->
     <div id="no-table">
       <img src="img/sad.svg"/>
       <h2> No table yet... </h2>
       <p> Please instert proper data in the above form. If there is an error in the input address that then submit again.</p>
     </div>
+    <!-- Table to render -->
     <div class="table-wrapper">
       <table id="results">
       </table>
