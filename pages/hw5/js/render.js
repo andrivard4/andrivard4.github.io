@@ -1,3 +1,4 @@
+// Read input from the user and handle rendering
 function getUserInput(e) {
   document.getElementById("no-table").style.display = "block";
   var error = false;
@@ -26,10 +27,12 @@ function getUserInput(e) {
   }
 }
 
+// Empty the table
 function clearTable() {
   document.getElementById("results").innerHTML = "";
 }
 
+// Empty any error messages
 function clearError(id) {
   let element = document.getElementById(id+'_error');
   element.innerHTML = "";
@@ -38,6 +41,7 @@ function clearError(id) {
   }
 }
 
+// Set an error message
 function handleError(id, message) {
   let element = document.getElementById(id+'_error');
   console.log(id+'_error');
@@ -45,9 +49,13 @@ function handleError(id, message) {
   element.classList.remove("hidden")
 }
 
+// Make sure input is a valid Number
+// Return in form of an object
+// isValud: bool if input is valid
+// reason: message explainging why not valid
 function validateInput(data, prev) {
   if (Number.isInteger(data)) {
-    if(prev != null && prev >= data) {
+    if(prev != null && prev > data) {
       return {isValid:false, reason:"This number must be larger then the previous one"}
     }
     else if (data < -50 || data > 50) {
@@ -58,6 +66,7 @@ function validateInput(data, prev) {
   return {valisValidid:false, reason:"Input must be of type integer"}
 }
 
+// Generates a table given 4 inputs as a 2D array
 function createTableData(data) {
   var hstart = data[0];
   var hend = data[1];
@@ -84,6 +93,7 @@ function createTableData(data) {
   return {data: table, height:numcol, width:numrow};
 }
 
+// Creates a table to display on the HTML page given a 2D array
 function renderTable(data) {
   var table_data = data.data;
   var height = data.height;
@@ -105,3 +115,28 @@ function renderTable(data) {
     table.appendChild(row);
   }
 }
+
+//Make the line look cool
+async function animate_line() {
+  var index = 50, direction = false;
+  var line = document.getElementById("line");
+  while(true) {
+    var color = "linear-gradient(90deg, rgba(255,190,0,1) 0%, rgba(255,113,0,1) "+index+"%, rgba(255,190,0,1) 100%)"
+    line.style.background = color;
+    if(index <= 10 || index >= 90) {
+      direction = !direction;
+    }
+    if(direction) {
+      index--;
+    } else {
+      index++;
+    }
+    await sleep(20)
+  }
+}
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+window.addEventListener("DOMContentLoaded", animate_line);
