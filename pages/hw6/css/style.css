@@ -1,0 +1,112 @@
+* {
+  font-family: 'Roboto';
+}
+.name {
+  font-weight: bold;
+  background: rgb(255,113,0);
+  background: linear-gradient(315deg, rgba(255,113,0,1) 0%, rgba(255,190,0,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;;
+}
+.hidden {
+  display: none;
+}
+.title {
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+}
+form {
+  margin: 0 auto;
+  text-align: center;
+}
+form div {
+  display: inline-block;
+  padding: 0 40px;
+  vertical-align: top
+}
+form input {
+  display: block;
+  margin: 10px auto;
+}
+input {
+  width: 50px;
+}
+
+label.error {
+  color:red;
+  font-style: italic;
+}
+
+input.error {
+  border: 2px solid red;
+  background-color: rgba(255, 8, 0, 0.48)
+}
+
+table {
+  background: rgb(255,113,0);
+  background: linear-gradient(315deg, rgba(255,113,0,1) 0%, rgba(255,190,0,1) 100%);
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+th {
+  color:white;
+  font-weight: bold;
+}
+td {
+  background: white;
+}
+tr > * {
+  padding: 5px 15px;
+}
+tr:nth-child(2n+1) > td {
+  background-color: rgba(217, 217, 217, 0.83);
+}
+.table-wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+  overflow: auto;
+  max-height: 60%;
+}
+
+h5 {
+  display: none;
+  text-align: center;
+  color: lightgray;
+  font-weight: normal;
+}
+
+.line {
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 5px;
+  background: rgb(255,113,0);
+}
+#no-table {
+  color: rgb(186, 186, 186);
+  width: 300px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+
+
+input[type="submit"] {
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 10px 25px;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  color:white;
+  background-color: rgba(255, 176, 0, 0.9);
+  border: 2px solid rgb(255, 176, 0);
+}
+input[type="submit"]:hover {
+  background-color: rgba(255, 176, 0, 0.8);
+}
+input[type="submit"]:active {
+  background-color: rgba(255, 176, 0, 1);
+}
