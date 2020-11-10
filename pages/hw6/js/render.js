@@ -69,28 +69,3 @@ function renderTable(data) {
   $("#date").text(current_date.toLocaleTimeString())
   $("h5").show();
 }
-
-//Make the line look cool
-async function animate_line() {
-  var index = 50, direction = false;
-  var line = document.getElementById("line");
-  while(true) {
-    var color = "linear-gradient(90deg, rgba(255,190,0,1) 0%, rgba(255,113,0,1) "+index+"%, rgba(255,190,0,1) 100%)"
-    line.style.background = color;
-    if(index <= 10 || index >= 90) {
-      direction = !direction;
-    }
-    if(direction) {
-      index--;
-    } else {
-      index++;
-    }
-    await sleep(20)
-  }
-}
-
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
-window.addEventListener("DOMContentLoaded", animate_line);
