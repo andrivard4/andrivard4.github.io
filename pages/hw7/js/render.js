@@ -1,4 +1,6 @@
-var tab_values = {}
+/* Andrew Rivard - andrew_rivard@uml.edu */
+
+var tab_values = {};
 // Read input from the user and handle rendering
 function getUserInput(e) {
   e.preventDefault();
@@ -35,13 +37,13 @@ function createTableData(data) {
   return { data: table, height: numcol, width: numrow };
 }
 
-// Creates a table to display on the HTML page given a 2D array
+// Creates a table to display on the HTML on the current tab given a 2D array
 function renderTable(data) {
   var table_data = data.data;
   var height = data.height;
   var width = data.width;
-  var table = document.getElementById("results-"+current_tab);
-  $('.no-table#tab-'+current_tab).hide();
+  var table = document.getElementById("results-" + current_tab);
+  $(".no-table#tab-" + current_tab).hide();
   table.innerHTML = "";
   $("h5").hide();
   for (var i = 0; i < height; i++) {
@@ -56,6 +58,6 @@ function renderTable(data) {
     table.appendChild(row);
   }
   var current_date = new Date();
-  $(".date#tab-"+current_tab).text(current_date.toLocaleTimeString());
+  $(".date#tab-" + current_tab).text(current_date.toLocaleTimeString());
   $("h5").show();
 }

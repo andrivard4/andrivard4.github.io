@@ -1,3 +1,5 @@
+/* Andrew Rivard - andrew_rivard@uml.edu */
+
 $(function () {
   // Creates a custom rule to compare agains the lower bound
   $.validator.addMethod(
@@ -49,7 +51,7 @@ $(function () {
     errorElement: "div",
     errorLabelContainer: ".error",
   });
-})
+});
 
 // Due to validators funky ways of adding rules, I decided to tie a check to an event
 $("input[name='one']").change(function () {

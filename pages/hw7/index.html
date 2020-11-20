@@ -1,9 +1,14 @@
+<!-- Andrew Rivard - andrew_rivard@uml.edu -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
     />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -13,14 +18,11 @@
     <script src="js/render.js"></script>
     <script src="js/validate.js"></script>
     <script src="js/tabs.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
-    />
     <title>Homework 7</title>
   </head>
   <body>
     <div class="line" id="line"></div>
+    <!-- Page jumbotron -->
     <div class="title">
       <h1 class="name" id="name">Multiplier</h1>
       <p>
@@ -58,13 +60,13 @@
         />
       </div>
       <div class="error"></div>
-      <input type="submit" value="Update"/>
-      <input type="button" id="add-tab" value="Add"/></br>
-      <input type="button" id="delete-tab" value="Delete"/>
+      <input type="submit" value="Update" />
+      <input type="button" id="add-tab" value="Add" /><br />
+      <input type="button" id="delete-tab" value="Delete" />
     </form>
-    <div id='tabs'>
-      <ul>
-      </ul>
+    <!-- Placeholder for the tabs and table populated by JS -->
+    <div id="tabs">
+      <ul></ul>
     </div>
   </body>
 </html>
