@@ -1,20 +1,14 @@
+var tab_values = {}
 // Read input from the user and handle rendering
 function getUserInput(e) {
-  document.getElementById("no-table").style.display = "block";
   e.preventDefault();
-  clearTable();
   var data = [];
   const formData = new FormData(e.target);
   formData.forEach((item, i) => {
     data.push(Number(item));
   });
+  tab_values[current_tab] = data;
   renderTable(createTableData(data));
-}
-
-// Empty the table
-function clearTable() {
-  $("#results").innerHTML = "";
-  $("h5").hide();
 }
 
 // Generates a table given 4 inputs as a 2D array
@@ -46,9 +40,10 @@ function renderTable(data) {
   var table_data = data.data;
   var height = data.height;
   var width = data.width;
-  var table = document.getElementById("results");
-  document.getElementById("no-table").style.display = "none";
+  var table = document.getElementById("results-"+current_tab);
+  $('.no-table#tab-'+current_tab).hide();
   table.innerHTML = "";
+  $("h5").hide();
   for (var i = 0; i < height; i++) {
     let row = document.createElement("tr");
     for (var j = 0; j < width; j++) {
@@ -61,6 +56,6 @@ function renderTable(data) {
     table.appendChild(row);
   }
   var current_date = new Date();
-  $("#date").text(current_date.toLocaleTimeString());
+  $(".date#tab-"+current_tab).text(current_date.toLocaleTimeString());
   $("h5").show();
 }

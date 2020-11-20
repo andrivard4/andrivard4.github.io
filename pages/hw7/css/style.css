@@ -129,14 +129,14 @@ h5 {
     background-position: 0% 50%;
   }
 }
-#no-table {
+.no-table {
   color: rgb(186, 186, 186);
   width: 300px;
   margin: 30px auto;
   text-align: center;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   font-size: 16px;
   border-radius: 5px;
   padding: 10px 25px;
@@ -144,17 +144,51 @@ input[type="submit"] {
   height: auto;
   margin: 20px auto;
   color: white;
+  background-color: rgba(255, 176, 0, 0.9);
+  border: none;
+}
+
+input[type="submit"] {
   background: linear-gradient(
     315deg,
     rgba(255, 113, 0, 1) 24%,
     rgba(255, 190, 0, 1) 83%
   );
   background-size: 200% 100%;
-  background-color: rgba(255, 176, 0, 0.9);
-  border: none;
   transition: background-position 0.5s;
 }
 
+input[type="button"]#add-tab {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 113, 0, 1) 24%,
+    rgba(255, 190, 0, 1) 83%
+  );
+  background-size: 200% 100%;
+  transition: background-position 0.5s;
+  background-position: 100% 0%;
+}
+input[type="button"]#delete-tab {
+  margin-top:-15px;
+  background: linear-gradient(
+    180deg,
+    rgba(193, 0, 0, 1) 24%,
+    rgba(255, 77, 0, 1) 83%
+  );
+  background-size: 100% 200%;
+  transition: background-position 0.5s;
+  background-position: 0% 100%;
+}
+input[type="button"]#add-tab:hover {
+  background-color: rgba(255, 176, 0, 0.8);
+  background-position: 0% 0%;
+  cursor: pointer;
+}
+input[type="button"]#delete-tab:hover {
+  background-color: rgba(255, 176, 0, 0.8);
+  background-position: 0% 0%;
+  cursor: pointer;
+}
 input[type="submit"]:hover {
   background-color: rgba(255, 176, 0, 0.8);
   background-position: 100% 0%;
@@ -162,4 +196,7 @@ input[type="submit"]:hover {
 }
 input[type="submit"]:active {
   background-color: rgba(255, 176, 0, 1);
+}
+input:disabled{
+  background: rgb(204,204,204) !important;
 }

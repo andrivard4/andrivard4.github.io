@@ -6,68 +6,18 @@
       href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/slider.js"></script>
     <script src="js/render.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/tabs.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto"
     />
     <title>Homework 7</title>
-    <script>
-      $(function () {
-        $("#xSlider").slider({
-          range: true,
-          min: -50,
-          max: 50,
-          step: 1,
-          values: [-30, 40],
-          slide: xChange,
-        });
-      });
-      $(function () {
-        $("#ySlider").slider({
-          range: true,
-          min: -50,
-          max: 50,
-          step: 1,
-          values: [-10, 20],
-          slide: yChange,
-        });
-      });
-      function xChange(event, ui) {
-        $(".range input")[ui.handleIndex].value = ui.value;
-        $("input[name='one']").valid();
-        $("input[name='two']").valid();
-      }
-      function yChange(event, ui) {
-        $(".range input")[2 + ui.handleIndex].value = ui.value;
-        $("input[name='three']").valid();
-        $("input[name='four']").valid();
-      }
-      function inputChange(target) {
-        if (target.name == "one" || target.name == "two") {
-          if (
-            !$("input[name='one']").valid() ||
-            !$("input[name='two']").valid()
-          )
-            return;
-          var one = Number($("input[name='one']").val());
-          var two = Number($("input[name='two']").val());
-          $("#xSlider").slider("values", [one, two]);
-        } else {
-          if (
-            !$("input[name='three']").valid() ||
-            !$("input[name='four']").valid()
-          )
-            return;
-          var three = Number($("input[name='three']").val());
-          var four = Number($("input[name='four']").val());
-          $("#ySlider").slider("values", [three, four]);
-        }
-      }
-    </script>
   </head>
   <body>
     <div class="line" id="line"></div>
@@ -108,22 +58,13 @@
         />
       </div>
       <div class="error"></div>
-      <input type="submit" />
+      <input type="submit" value="Update"/>
+      <input type="button" id="add-tab" value="Add"/></br>
+      <input type="button" id="delete-tab" value="Delete"/>
     </form>
-    <!-- Message when no table is rendered -->
-    <div id="no-table">
-      <img src="img/sad.svg" />
-      <h2>No table yet...</h2>
-      <p>
-        Please insert proper data in the above form. If there is an error in the
-        input address that then submit again.
-      </p>
+    <div id='tabs'>
+      <ul>
+      </ul>
     </div>
-    <!-- Table to render -->
-    <div class="table-wrapper">
-      <table id="results"></table>
-    </div>
-    <h5>Table last updated <span id="date"></span></h5>
-    <script src="js/validate.js"></script>
   </body>
 </html>
