@@ -6,6 +6,8 @@ var tab_index = 1;
 var tab_count = 0;
 // describes the current tab selected
 var current_tab = 1;
+//
+var delete_tabs = []
 
 $(function () {
   //Generates a tab widget
@@ -24,11 +26,27 @@ $(function () {
   $("#delete-tab").click(deleteTab);
 });
 
+function handleDelete(event) {
+  const numb = event.target.id.substring(6)
+  if (event.target.checked) {
+    delete_tabs.push(numb)
+    if (delete_tabs.length == 1)
+      $("#delete-tab").prop('disabled', false);
+  } else {
+    const index = delete_tabs.indexOf(numb);
+    if (index > -1)
+      delete_tabs.splice(index, 1);
+    if (delete_tabs.length == 0)
+      $("#delete-tab").prop('disabled', true);
+  }
+}
+
 // Generates the base template for a tab
 function generateNodes() {
   var tab_template = `
   <li>
     <a href="#tabs-${tab_index}">Table ${tab_index}</a>
+    <input type='checkbox' id="check-${tab_index}" onchange='handleDelete(event)'/>
   </li>`;
   var body_template = `
   <div id="tabs-${tab_index}">
@@ -36,8 +54,7 @@ function generateNodes() {
       <img src="img/sad.svg" />
       <h2>No table yet...</h2>
       <p>
-        Please insert proper data in the above form. If there is an error in the
-        input address that then submit again.
+        Please insert proper data in the above form or adjust the sliders. If there is an error in the input address that error.
       </p>
     </div>
     <!-- Table to render -->
@@ -60,22 +77,31 @@ function addTab() {
   tab_index++;
   tab_count++;
   if (tab_count == 1) {
-    $('input[type="submit"]').prop("disabled", false);
-    $("#delete-tab").prop("disabled", false);
+    $("#input :input").prop('disabled', false);
+    if (delete_tabs.length == 0)
+      $("#delete-tab").prop('disabled', true);
+    $("#xSlider").slider({ disabled: false })
+    $("#ySlider").slider({ disabled: false })
   }
 }
 
 //Removes active tab, sets active tab to last added tab
 function deleteTab() {
-  $("#tabs-" + current_tab).remove();
-  // Refresh the tabs widget
-  var hrefStr = "a[href='" + "#tabs-" + current_tab + "']";
-  $(hrefStr).closest("li").remove();
-  tab_count--;
-  $("#tabs").tabs({ active: tab_count });
-  $("#tabs").tabs("refresh");
+  delete_tabs.forEach((item, i) => {
+    $("#tabs-" + item).remove();
+    var hrefStr = "a[href='" + "#tabs-" + item + "']";
+    $(hrefStr).closest("li").remove();
+    tab_count--;
+  });
   if (tab_count == 0) {
-    $('input[type="submit"]').prop("disabled", true);
-    $("#delete-tab").prop("disabled", true);
+    $("#xSlider").slider({ disabled: true })
+    $("#ySlider").slider({ disabled: true })
+    $("#input :input").prop('disabled', true);
+    $("#add-tab").prop("disabled", false);
   }
+  $("#tabs").tabs("refresh");
+  $("#tabs").tabs({ active: current_tab });
+  console.log("Remove", current_tab, tab_count)
+  delete_tabs = []
+  $("#delete-tab").prop('disabled', true);
 }

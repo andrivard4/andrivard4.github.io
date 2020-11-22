@@ -45,9 +45,6 @@ $(function () {
     messages: {
       step: "Please enter an integer.",
     },
-    submitHandler: function (form, event) {
-      getUserInput(event);
-    },
     errorElement: "div",
     errorLabelContainer: ".error",
   });

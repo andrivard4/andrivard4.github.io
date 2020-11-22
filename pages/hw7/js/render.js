@@ -1,11 +1,17 @@
 /* Andrew Rivard - andrew_rivard@uml.edu */
 
+$( function() {
+  $('#input').change(function() {
+      if( !$("#input").valid() ) return;
+      getUserInput(this)
+  })
+});
+
 var tab_values = {};
 // Read input from the user and handle rendering
-function getUserInput(e) {
-  e.preventDefault();
+function getUserInput(form) {
   var data = [];
-  const formData = new FormData(e.target);
+  const formData = new FormData(form);
   formData.forEach((item, i) => {
     data.push(Number(item));
   });

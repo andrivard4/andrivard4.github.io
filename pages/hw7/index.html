@@ -31,7 +31,7 @@
       </p>
     </div>
     <!-- This is the main form for the page -->
-    <form id="input">
+    <form id="input" onsubmit="return false;">
       <label>Range 1</label>
       <div class="range">
         <input
@@ -60,9 +60,8 @@
         />
       </div>
       <div class="error"></div>
-      <input type="submit" value="Update" />
-      <input type="button" id="add-tab" value="Add" /><br />
-      <input type="button" id="delete-tab" value="Delete" />
+      <input type="button" id="add-tab" value="Add" />
+      <input type="button" id="delete-tab" value="Delete"/>
     </form>
     <!-- Placeholder for the tabs and table populated by JS -->
     <div id="tabs">
