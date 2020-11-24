@@ -27,13 +27,13 @@ function xChange(event, ui) {
   $(".range input")[ui.handleIndex].value = ui.value;
   $("input[name='one']").valid();
   $("input[name='two']").valid();
-  getUserInput($('#input')[0])
+  getUserInput($("#input")[0]);
 }
 function yChange(event, ui) {
   $(".range input")[2 + ui.handleIndex].value = ui.value;
   $("input[name='three']").valid();
   $("input[name='four']").valid();
-  getUserInput($('#input')[0])
+  getUserInput($("#input")[0]);
 }
 
 // When the input changes, if its valid, reflect that on the slider
@@ -51,7 +51,6 @@ function inputChange(target) {
     var four = Number($("input[name='four']").val());
     $("#ySlider").slider("values", [three, four]);
   }
-
 }
 
 //Given an array of 4 values, update those values then validate

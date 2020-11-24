@@ -7,7 +7,7 @@ var tab_count = 0;
 // describes the current tab selected
 var current_tab = 1;
 //
-var delete_tabs = []
+var delete_tabs = [];
 
 $(function () {
   //Generates a tab widget
@@ -27,17 +27,14 @@ $(function () {
 });
 
 function handleDelete(event) {
-  const numb = event.target.id.substring(6)
+  const numb = event.target.id.substring(6);
   if (event.target.checked) {
-    delete_tabs.push(numb)
-    if (delete_tabs.length == 1)
-      $("#delete-tab").prop('disabled', false);
+    delete_tabs.push(numb);
+    if (delete_tabs.length == 1) $("#delete-tab").prop("disabled", false);
   } else {
     const index = delete_tabs.indexOf(numb);
-    if (index > -1)
-      delete_tabs.splice(index, 1);
-    if (delete_tabs.length == 0)
-      $("#delete-tab").prop('disabled', true);
+    if (index > -1) delete_tabs.splice(index, 1);
+    if (delete_tabs.length == 0) $("#delete-tab").prop("disabled", true);
   }
 }
 
@@ -77,11 +74,10 @@ function addTab() {
   tab_index++;
   tab_count++;
   if (tab_count == 1) {
-    $("#input :input").prop('disabled', false);
-    if (delete_tabs.length == 0)
-      $("#delete-tab").prop('disabled', true);
-    $("#xSlider").slider({ disabled: false })
-    $("#ySlider").slider({ disabled: false })
+    $("#input :input").prop("disabled", false);
+    if (delete_tabs.length == 0) $("#delete-tab").prop("disabled", true);
+    $("#xSlider").slider({ disabled: false });
+    $("#ySlider").slider({ disabled: false });
   }
 }
 
@@ -94,14 +90,14 @@ function deleteTab() {
     tab_count--;
   });
   if (tab_count == 0) {
-    $("#xSlider").slider({ disabled: true })
-    $("#ySlider").slider({ disabled: true })
-    $("#input :input").prop('disabled', true);
+    $("#xSlider").slider({ disabled: true });
+    $("#ySlider").slider({ disabled: true });
+    $("#input :input").prop("disabled", true);
     $("#add-tab").prop("disabled", false);
   }
   $("#tabs").tabs("refresh");
   $("#tabs").tabs({ active: current_tab });
-  console.log("Remove", current_tab, tab_count)
-  delete_tabs = []
-  $("#delete-tab").prop('disabled', true);
+  console.log("Remove", current_tab, tab_count);
+  delete_tabs = [];
+  $("#delete-tab").prop("disabled", true);
 }

@@ -1,10 +1,10 @@
 /* Andrew Rivard - andrew_rivard@uml.edu */
 
-$( function() {
-  $('#input').change(function() {
-      if( !$("#input").valid() ) return;
-      getUserInput(this)
-  })
+$(function () {
+  $("#input").change(function () {
+    if (!$("#input").valid()) return;
+    getUserInput(this);
+  });
 });
 
 var tab_values = {};
