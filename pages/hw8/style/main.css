@@ -1,0 +1,78 @@
+.tile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+.board {
+  margin: 300px;
+  background-color:lightGray;
+  display: inline-block;
+  padding: 30px;
+}
+
+.tile img{
+  width: 69px;
+  height: 75px;
+  margin: 1px;
+}
+
+.tile-space {
+  z-index: 10;
+  width: 1px;
+  height: 1px;
+}
+
+.tile-space-wrapper {
+  vertical-align: top;
+  width: 70px;
+  height: 76px;
+  display: inline-block;
+  border: solid gray 2px;
+  border-radius: 2px;
+  margin: 3px;
+}
+
+.tile-space-wrapper.double-letter{
+  border-color: red;
+  color: red;
+  text-align: center;
+}
+
+.tile-space-wrapper.double-word{
+  border-color:blue;
+  color:blue;
+  text-align: center;
+}
+
+.tile-space-wrapper.double-word::after {
+  content: 'Double Word'
+}
+
+.tile-space-wrapper.double-letter::after {
+  content: 'Double Letter'
+}
+
+.tile-space-blank {
+  vertical-align: top;
+  width: 74px;
+  height: 80px;
+  display: inline-block;
+}
+
+.tray {
+  margin: 0 300px;
+  background-color:lightGray;
+  display: inline-block;
+  padding: 30px;
+}
+
+#tray-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#tray-list li{
+  display: inline-block;
+}
