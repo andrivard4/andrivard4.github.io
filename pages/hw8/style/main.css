@@ -1,34 +1,86 @@
-.tile {
-  width: 1px;
-  height: 1px;
+/* Andrew Rivard - andrew_rivard@student.uml.edu */
+/* General Styling*/
+body {
+  height: 100%;
+  text-align: center;
+  font-family: 'roboto';
+  background: linear-gradient(
+    0deg,
+    rgba(236, 164, 107, 1) 24%,
+    rgba(238, 182, 85, 1) 83%
+  );
+  background-color: rgba(236, 164, 107, 1);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-body {
-  text-align: center;
+.title img {
+  margin: 40px 0 20px;
+  width: 10%;
+  max-width: 70px;
+  min-width: 35px;
+  height: auto;
 }
 
 ul {
   text-align: left;
 }
 
+#error {
+  color: red;
+  font-style: italic;
+}
+
 .wrapper {
   width: 100%;
   white-space: nowrap;
   overflow: auto;
-
 }
+/* End General Styling*/
 
+/* Styling for the board and tray*/
 .board {
   margin: 50px;
-  background-color:lightGray;
+  background-color: rgba(198, 198, 198, 0.7);
   display: inline-block;
   padding: 30px;
 }
 
-.tile img{
+.trash .tile-space-wrapper {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("https://img.icons8.com/material-outlined/384/000000/trash--v1.png");
+}
+
+.tray,
+.trash {
+  margin: 50px;
+  background-color: rgba(198, 198, 198, 0.7);
+  display: inline-block;
+  padding: 30px;
+}
+
+#tray-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#tray-list li {
+  display: inline-block;
+}
+/* End tray/board styling */
+
+/*Tile styling */
+.tile img {
   width: 69px;
   height: 75px;
   margin: 1px;
+}
+
+.tile {
+  width: 1px;
+  height: 1px;
 }
 
 .tile-space {
@@ -38,6 +90,7 @@ ul {
 }
 
 .tile-space-wrapper {
+  background-color: rgb(199, 199, 199);
   vertical-align: top;
   width: 70px;
   height: 76px;
@@ -47,7 +100,7 @@ ul {
   margin: 3px;
 }
 
-.tile-space-wrapper.double-letter{
+.tile-space-wrapper.double-letter {
   border-color: red;
   background-image: url("../resources/Letter.png");
   background-size: contain;
@@ -56,9 +109,9 @@ ul {
   text-align: center;
 }
 
-.tile-space-wrapper.double-word{
-  border-color:blue;
-  color:blue;
+.tile-space-wrapper.double-word {
+  border-color: blue;
+  color: blue;
   background-image: url("../resources/Word.png");
   background-size: contain;
   background-position: center;
@@ -76,35 +129,34 @@ ul {
   height: 30px;
   margin: 2px;
 }
+/*End Tile styling */
 
+/* Removes the X button on JQuery UI dialog */
 .ui-dialog-titlebar-close {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-.trash .tile-space-wrapper {
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url('https://img.icons8.com/material-outlined/384/000000/trash--v1.png');
+/* BUTTON STYLING */
+
+input[type="button"] {
+  background: linear-gradient(
+    315deg,
+    rgba(255, 113, 0, 1) 24%,
+    rgba(255, 161, 0, 1) 83%
+  );
+  background-size: 200% 100%;
+  transition: background-position 0.5s;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 10px 25px;
+  height: auto;
+  margin: 20px auto;
+  color: white;
+  border: none;
 }
 
-#error {
-  color:red;
-  font-style: italic;
-}
-
-.tray, .trash {
-  margin: 50px;
-  background-color:lightGray;
-  display: inline-block;
-  padding: 30px;
-}
-
-#tray-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#tray-list li{
-  display: inline-block;
+input[type="button"]:hover {
+  background-color: rgba(255, 113, 0, 1);
+  background-position: 100% 0%;
+  cursor: pointer;
 }
