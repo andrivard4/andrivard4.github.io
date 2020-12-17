@@ -63,6 +63,7 @@ function submit() {
   word_data = getWord()
   if (word_data)
     score += word_data.value
+  $('#score')[0].innerHTML = score
   console.log(word_data, score);
   restore();
 }
@@ -280,4 +281,12 @@ function restore(reset=false) {
   draggable()
   generate_board(line)
   started = false
+}
+
+function restart() {
+  score = 0
+  restore(true)
+  $('#score')[0].innerHTML = score
+  bag = []
+  fillBag()
 }

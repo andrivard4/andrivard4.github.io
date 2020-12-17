@@ -16,11 +16,20 @@
     <div class="">
       <button onclick="submit()">Submit</button>
       <button onclick="restore(true)">Reset Word</button>
-      <button>Restart Game</button>
+      <button onclick="restart()">Restart Game</button>
+      <h2>Score: <span id="score">0</span></h2>
     </div>
     <div class="board">
     </div>
     <div class="tray">
+    </div>
+
+    <div class="trash">
+      <div class="tile-space-wrapper">
+        <div class="tile-space" id="trash">
+          <p>Trash</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

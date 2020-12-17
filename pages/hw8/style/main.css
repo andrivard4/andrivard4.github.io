@@ -60,7 +60,7 @@
   display: inline-block;
 }
 
-.tray {
+.tray, .trash {
   margin: 0 300px;
   background-color:lightGray;
   display: inline-block;
