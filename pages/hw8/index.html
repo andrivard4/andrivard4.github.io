@@ -11,23 +11,57 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src ="script/main.js"></script>
+    <script src ="script/words.js"></script>
   </head>
   <body>
-    <div class="">
-      <button onclick="submit()">Submit</button>
-      <button onclick="restore(true)">Reset Word</button>
-      <button onclick="restart()">Restart Game</button>
-      <h2>Score: <span id="score">0</span></h2>
-    </div>
-    <div class="board">
-    </div>
-    <div class="tray">
-    </div>
+    <div class="wrapper">
+      <div class="container">
+        <button onclick="submit()">Submit</button>
+        <button onclick="restore(false, true)">Reset Word</button>
+        <button onclick="$( '#dialog-rules' ).dialog('open');">Game Rules</button>
+        <button onclick="end()">End Game</button>
+        <button onclick="$( '#dialog-restart' ).dialog('open');">Restart Game</button>
+        <div id="dialog" title="End Game?">If you end the game you will loose <span id="points">0</span> points now.</div>
+        <div id="dialog-restart" title="Restart?">Do you really want to restart?</div>
+        <div id="dialog-end" title="Game Over">
+          <h2>The Game Is Over!</h2>
+          <h3>Here are your results:</h3>
+          <h3>Words made:</h3>
+          <div class="words"></div>
+          <h3>Tiles Discarded:</h3>
+          <div class="discarded"></div>
+          <h3>Tiles left in bag:</h3>
+          <div class="left"></div>
+          <h3>Final Score:</h3>
+          <div class="final-score"></div>
+        </div>
+        <div id="dialog-rules" title="Rules">
+          <p> This is an interpretation of the classic game scrabble to be played single player. It plays a bit diffrently from how regular scrabble plays, so listen up to the following rules:</p>
+          <ul>
+            <li>The goal is to get the highest score</li>
+            <li>Word score is calculated by value of tiles in play and bonuses</li>
+            <li>You can discard tiles in your hand, but that will subtract their value from the total score</li>
+            <li>You can always resart the game or reset the current word, but discarded tiles will never come back</li>
+            <li>The bag holds the tiles that are remaining but not in play, also known as "Tiles left"</li>
+            <li>Once you have no moves left, you can select "End Game"</li>
+            <li>If you end the game with extra tiles in your bag, the total value of those tiles will be subtracted from your score, so use as many as you can!</li>
+            <li>Your total score is calculated by the following: score = word values - discarded tiles - remaining tiles in the bag</li>
+          </ul>
+          <h3>Good Luck!</h3>
+        </div>
+        <h2>Score: <span id="score">0</span></h2>
+        <h2>Tiles left: <span id="tileCount">0</span></h2>
+        <p id="result"></p>
+      </div>
+      <div class="board">
+      </div><br>
+      <div class="tray">
+      </div>
 
-    <div class="trash">
-      <div class="tile-space-wrapper">
-        <div class="tile-space" id="trash">
-          <p>Trash</p>
+      <div class="trash">
+        <div class="tile-space-wrapper">
+          <div class="tile-space" id="trash">
+          </div>
         </div>
       </div>
     </div>

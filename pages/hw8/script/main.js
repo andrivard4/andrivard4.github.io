@@ -13,13 +13,21 @@ var line = [
   {valid: true, id: 11}
 ]
 
-var started = false;
-var score = 0;
+
+function validateWord(word) {
+  return valid.find(function(el) {
+    return el == word.toLowerCase();
+  })
+}
+
+var started = false
+var score = 0
+var sub = 0
 
 
 // Creator Ramon Meza
 var pieces = [
-	{"letter":"A", "value":1, "amount":9},
+  {"letter":"A", "value":1, "amount":9},
 	{"letter":"B", "value":3, "amount":2},
 	{"letter":"C", "value":3, "amount":2},
 	{"letter":"D", "value":2, "amount":4},
@@ -48,8 +56,8 @@ var pieces = [
 ]
 
 var bag = []
-
-var start_tray
+var discarded = []
+var words = []
 
 function fillBag() {
   pieces.forEach((item) => {
@@ -61,11 +69,26 @@ function fillBag() {
 
 function submit() {
   word_data = getWord()
-  if (word_data)
-    score += word_data.value
+  if (word_data) {
+    if (! validateWord(word_data.word)) {
+      restore(false, true);
+      $("#result").html(`<span id='error'> ${word_data.word} is not a word! Try again...</span>`)
+    } else {
+      $("#result").html(word_data.word + " was accepted!")
+      updateScore(word_data.value)
+      words.push(word_data)
+      restore();
+    }
+  }
+}
+
+function updateScore(change) {
+  score += change
   $('#score')[0].innerHTML = score
-  console.log(word_data, score);
-  restore();
+}
+
+function updateBagCount() {
+  $('#tileCount')[0].innerHTML = bag.length
 }
 
 //Gets words and values from line
@@ -84,6 +107,9 @@ function getWord() {
       if (tile.special == 1) current_value += tile.value
       if (tile.special == 2) double_value++
     }
+  }
+  if (current_word) {
+    return {word: current_word, value: current_value*double_value}
   }
   return false
 }
@@ -117,6 +143,13 @@ function setTileData(id, letter, value) {
   console.log("Tile not found!");
 }
 
+function getLetterData(letter) {
+  for (var data of pieces)
+    if (data.letter == letter)
+      return data
+  return false
+}
+
 // Removes data from tile slot
 function removeTileData(id) {
   for (var tile of line) {
@@ -143,9 +176,15 @@ function draggable() {
   $( ".tile" ).draggable({
     snap: '.tile-space', snapMode: 'inner',
     revert: function(event, ui) {
+
       var draggable = $(this).data('ui-draggable')
+      /* Pull out only the snap targets that are "snapping": */
+      var snappedTo = $.map(draggable.snapElements, function(element) {
+          return element.snapping ? element.item : null;
+      })[0];
       for (var element of draggable.snapElements) {
         if (element.snapping) {
+          if (snappedTo.id == "trash") return false
           if (started && !isNext(element.item.getAttribute('data-id')-1)) {
             element.snapping = false
             return true
@@ -179,10 +218,21 @@ function draggable() {
 
       var element = event.target;
       if (snappedTo) {
-        removeTileData(event.target.parentNode.getAttribute('data-id'))
-        event.target.parentElement.innerHTML = ''
-        snappedTo.appendChild(element)
-        setTileData(element.parentNode.getAttribute('data-id'), element.getAttribute('data-letter'))
+        if (snappedTo.id == 'trash') {
+          letterData = getLetterData(event.target.getAttribute('data-letter'))
+          discarded.push(event.target.getAttribute('data-letter'))
+          updateScore(-1*letterData.value)
+          $(event.target).remove()
+          populate_tray(1)
+          started = false
+        }
+        else {
+          removeTileData(event.target.parentNode.getAttribute('data-id'))
+          event.target.parentElement.innerHTML = ''
+          snappedTo.appendChild(element)
+          setTileData(element.parentNode.getAttribute('data-id'), element.getAttribute('data-letter'))
+        }
+        element.style.position = ""
       }
       event.target.style.zIndex = 'auto'
     }
@@ -190,11 +240,101 @@ function draggable() {
 }
 
 
-$( function() {
-  fillBag();
+$(
+  function() {
+    $( "#dialog-restart" ).dialog({
+      autoOpen: false,
+      draggable: false,
+      modal: true,
+      open: function(event, ui) {
+        $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+      },
+      buttons: [
+        {
+          text: "Yes",
+          closeOnEscape: false,
+          click: function() {
+            restart();
+            $( this ).dialog( "close" );
+          }
+        },
+        {
+          text: "Continue",
+          click: function() {
+            $( this ).dialog( "close" );
+          }
+        },
+      ]
+    });
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      draggable: false,
+      modal: true,
+      open: function(event, ui) {
+        $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+      },
+      buttons: [
+        {
+          text: "End Game",
+          closeOnEscape: false,
+          click: function() {
+            showResults();
+            $( this ).dialog( "close" );
+          }
+        },
+        {
+          text: "Continue",
+          click: function() {
+            sub = 0
+            $( this ).dialog( "close" );
+          }
+        },
+      ]
+    });
+    $( "#dialog-end" ).dialog({
+      autoOpen: false,
+      draggable: false,
+      closeOnEscape: false,
+      open: function(event, ui) {
+        $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+      },
+      width: $(window).width() * .8,
+      maxWidth: 600,
+      minWidth: 300,
+      modal: true,
+      buttons: [
+        {
+          text: "New Game?",
+          click: function() {
+            restart();
+            $( this ).dialog( "close" );
+          }
+        },
+      ]
+    });
+    $( "#dialog-rules" ).dialog({
+      autoOpen: false,
+      draggable: false,
+      closeOnEscape: false,
+      open: function(event, ui) {
+        $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+      },
+      width: $(window).width() * .6,
+      maxWidth: 500,
+      minWidth: 300,
+      modal: true,
+      buttons: [
+        {
+          text: "Got it!",
+          click: function() {
+            $( this ).dialog( "close" );
+          }
+        },
+      ]
+    });
+    fillBag();
     generate_board(line);
     generate_tray();
-    draggable();
   }
 );
 
@@ -221,23 +361,37 @@ function generate_tray() {
 }
 
 // Fills the empty slots in the tray
-function populate_tray() {
+function populate_tray(max = false, letters = []) {
+
   var ids = ['one', 'two', 'tree', 'four', 'five', 'six', 'seven']
-  ids.forEach((id, ids) => {
-    if ($(".tray [data-id="+id + "]").children().length == 0) {
-      $(".tray [data-id="+id + "]").append(getRandomTile())
+  for (var i = 0, j = 0; i < ids.length && (!max || j < max); i++) {
+    if ($(".tray [data-id="+ ids[i] + "]").children().length == 0) {
+      if (letters.length)
+        $(".tray [data-id="+ ids[i] + "]").append(generateTile(letters.pop()))
+      else {
+        tile = getRandomTile()
+        if (tile)
+          $(".tray [data-id="+ ids[i] + "]").append(tile)
+      }
+      j++
     }
-  });
-  start_tray = $(".tray").clone()
+  }
+  draggable()
 }
 
 function getRandomTile() {
+  if (bag.length == 0) return false
   var index = getRandomInt(0, bag.length)
-  var tile = `<div class="tile" data-letter="${bag[index]}">
-      <img src="resources/tiles/Scrabble_Tile_${bag[index]}.jpg" alt="${bag[index]}">
-  </div>`
+  var tile = generateTile(bag[index])
   bag.splice(index, 1)
+  updateBagCount()
   return tile
+}
+
+function generateTile(letter) {
+  return `<div class="tile" data-letter="${letter}">
+      <img src="resources/tiles/Scrabble_Tile_${letter}.jpg" alt="${letter}">
+  </div>`
 }
 
 
@@ -259,7 +413,29 @@ function generate_slot(id, special, board=false) {
 }
 
 
-function restore(reset=false) {
+function restore(reset=false, replace = false) {
+  if (!reset) {
+      if(replace) {
+      letters = []
+
+      line.forEach((item) => {
+        if(item.letter)
+          letters.push(item.letter)
+      })
+
+      populate_tray(false, letters)
+    }
+    else
+      populate_tray()
+    draggable()
+  }
+  else {
+    $(".tray").empty()
+    generate_tray()
+  }
+  $('.board').empty()
+  generate_board(line)
+  started = false
   line = [
     {valid: true, id: 1},
     {valid: true, id: 2},
@@ -273,20 +449,66 @@ function restore(reset=false) {
     {valid: true, id: 10},
     {valid: true, id: 11}
   ]
-  if (reset)
-    $('.tray').replaceWith(start_tray)
-  else
-    populate_tray()
-  $('.board').empty()
-  draggable()
-  generate_board(line)
-  started = false
 }
 
 function restart() {
   score = 0
-  restore(true)
-  $('#score')[0].innerHTML = score
   bag = []
   fillBag()
+  $("#result").html("")
+  restore(true)
+  $('#score')[0].innerHTML = score
+  discarded = []
+  words = []
+}
+
+function end() {
+
+  if (!bag.length == 0) {
+    for (var tile of bag) {
+      sub +=  getLetterData(tile).value
+    }
+    $('#points')[0].innerHTML = sub
+    $( "#dialog" ).dialog( "open" );
+    return;
+  }
+
+  showResults();
+}
+
+function generateResultWords(words) {
+  return_nodes = []
+  for (var word of words) {
+    if (!word) continue;
+    word_result = []
+    for (var letter of word.word) {
+      word_result.push(`<img src="resources/tiles/Scrabble_Tile_${letter}.jpg" alt="${letter}" class="result-tile">`)
+    }
+    word_result.push("<br>")
+    return_nodes.push(word_result)
+  }
+  console.log(return_nodes);
+  return return_nodes
+}
+
+function generateResultTiles(tiles) {
+  var return_nodes = []
+  for (var letter of tiles) {
+    return_nodes.push(`<img src="resources/tiles/Scrabble_Tile_${letter}.jpg" alt="${letter}" class="result-tile">`)
+  }
+  return return_nodes
+}
+
+function showResults() {
+  $('.final-score')[0].innerHTML = score-sub
+  $('.words').empty()
+  generateResultWords(words).forEach((item) => {
+    $('.words').append(item)
+  });
+  $('.discarded').empty()
+  $('.discarded').append(generateResultTiles(discarded))
+  $('.left').empty()
+  $('.left').append(generateResultTiles(bag))
+  $( "#dialog-end" ).dialog( "open" );
+  sub = 0
 }

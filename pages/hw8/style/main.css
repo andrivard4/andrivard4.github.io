@@ -1,11 +1,25 @@
 .tile {
-  position: absolute;
   width: 1px;
   height: 1px;
 }
 
+body {
+  text-align: center;
+}
+
+ul {
+  text-align: left;
+}
+
+.wrapper {
+  width: 100%;
+  white-space: nowrap;
+  overflow: auto;
+
+}
+
 .board {
-  margin: 300px;
+  margin: 50px;
   background-color:lightGray;
   display: inline-block;
   padding: 30px;
@@ -35,6 +49,9 @@
 
 .tile-space-wrapper.double-letter{
   border-color: red;
+  background-image: url("../resources/Letter.png");
+  background-size: contain;
+  background-position: center;
   color: red;
   text-align: center;
 }
@@ -42,15 +59,10 @@
 .tile-space-wrapper.double-word{
   border-color:blue;
   color:blue;
+  background-image: url("../resources/Word.png");
+  background-size: contain;
+  background-position: center;
   text-align: center;
-}
-
-.tile-space-wrapper.double-word::after {
-  content: 'Double Word'
-}
-
-.tile-space-wrapper.double-letter::after {
-  content: 'Double Letter'
 }
 
 .tile-space-blank {
@@ -60,8 +72,28 @@
   display: inline-block;
 }
 
+.result-tile {
+  height: 30px;
+  margin: 2px;
+}
+
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+
+.trash .tile-space-wrapper {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url('https://img.icons8.com/material-outlined/384/000000/trash--v1.png');
+}
+
+#error {
+  color:red;
+  font-style: italic;
+}
+
 .tray, .trash {
-  margin: 0 300px;
+  margin: 50px;
   background-color:lightGray;
   display: inline-block;
   padding: 30px;
